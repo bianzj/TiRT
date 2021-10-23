@@ -2,29 +2,30 @@
 thermal infrared radiative transfer (TiRT) model
 
 
-# 典型植被热辐射方向性建模
+# 典型植被热红外辐射传输建模
 
-*适用场景*：均质植被、垄行作物和离散森林
+>**适用场景**：均质植被、垄行作物和离散森林
 
-*建模层次*：物理模型、半物理模型和半经验模型
+>**建模层次**：物理模型、半物理模型和半经验模型
 
-*建模策略*：体素模型、解析模型和核驱动模型
+>**建模策略**：体素模型、解析模型和核驱动模型
 
 
 使用说明:
 
 physical,semi-physical 和semi-empirical 目录下分别有均质植被、垄行作物和离散森林的使用案例
 
-0.调用方法
-'''
+
+0. 调用方法
+```
 from physical.hom_voxel import *
 from semiphysical.hom import *
 from hotspot import *
 from matplotlib import pyplot as plt
-'''
+```
 
 1. 设置输入
-'''
+```
 lai = 0.5
 hspot = 0.15
 wavelength = 10.5
@@ -36,21 +37,21 @@ temperature_soil_sunlit = 320
 temperature_soil_shaded = 305
 sza = 25
 vza = np.hstack([np.linspace(50,1,50),np.linspace(0,50,51)])
-'''
+```
 2. 调用类/函数
-'''
+```
 hom_voxel = Hom_Voxel()
 hom_voxel.set_structure(lai, hspot,100)
 hom_voxel.set_optical(wavelength, emissivity_soil, emissivity_leaf)
 hom_voxel.set_thermal(temperature_soil_sunlit, temperature_soil_shaded, temperature_leaf_sunlit, temperature_leaf_shaded)
 hom_voxel.set_angle(vza, sza, raa)
 BT_voxel = hom_voxel.run()
-'''
+```
 3. 显示结果
-'''
+```
 plt.plot(BT_voxel)
 plt.show()
-'''
+```
 
 
 Email contact: bianzj@aircas.ac.cn
